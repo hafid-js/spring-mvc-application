@@ -19,17 +19,17 @@ public class VerificationTokenService implements IVerificationTokenService {
     @Override
     public String validateToken(String token) {
         Optional<VerificationToken> theToken = tokenRepository.findByToken(token);
-        if (theToken.isEmpty()) {
-            return "invalid";
+        if (theToken.isEmpty()){
+            return "INVALID";
         }
         User user = theToken.get().getUser();
         Calendar calendar = Calendar.getInstance();
-        if ((theToken.get().getExpirationTime().getTime() - calendar.getTime().getTime()) <= 0) {
-            return "expired";
+        if ((theToken.get().getExpirationTime().getTime()-calendar.getTime().getTime())<= 0){
+            return "EXPIRED";
         }
         user.setEnabled(true);
         userRepository.save(user);
-        return "valid";
+        return "VALID";
     }
 
     @Override
