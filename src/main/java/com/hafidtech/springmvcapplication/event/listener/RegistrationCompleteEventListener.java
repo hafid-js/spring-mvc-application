@@ -17,6 +17,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class RegistrationCompleteEventListener implements ApplicationListener<RegistrationCompleteEvent> {
+
     private final VerificationTokenService tokenService;
 
     private final JavaMailSender mailSender;
@@ -56,6 +57,17 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
                 "Please, Follow the link below to complete your registration.</p>"+
                 "<a href=\"" +url+ "\">Verify your email to activate your account</a>"+
                 "<p> Thank you <b> Users Registration Portal Service";
+        emailMessage(subject, senderName, mailContent, mailSender, user);
+    }
+
+    public void sendPasswordResetVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Password Reset Request Verification";
+        String senderName = "Users Verification Service";
+        String mailContent = "<p> Hi, "+ user.getFirstName()+ ", </p>"+
+                "<p><b>You recently requested to reset your password,</b>"+"" +
+                "Please, follow the link below to complete the action.</p>"+
+                "<a href=\"" +url+ "\">Reset password</a>"+
+                "<p> Users Registration Portal Service";
         emailMessage(subject, senderName, mailContent, mailSender, user);
     }
 

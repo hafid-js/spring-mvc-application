@@ -1,4 +1,4 @@
-package com.hafidtech.springmvcapplication.registration.token;
+package com.hafidtech.springmvcapplication.utility;
 
 import java.util.Calendar;
 import java.util.Date;
