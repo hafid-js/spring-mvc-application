@@ -16,17 +16,17 @@ public class EndToEndUserDetails implements UserDetails {
 
     private String userName;
     private String password;
-
-    private Boolean isEnabled;
+    private boolean isEnabled;
     private List<GrantedAuthority> authorities;
 
     public EndToEndUserDetails(User user) {
         this.userName = user.getEmail();
         this.password = user.getPassword();
         this.isEnabled = user.isEnabled();
-        this.authorities = Arrays.stream(user.getRoles().toString().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        this.authorities =
+                Arrays.stream(user.getRoles().toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
     }
 
     @Override
@@ -61,6 +61,6 @@ public class EndToEndUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 }

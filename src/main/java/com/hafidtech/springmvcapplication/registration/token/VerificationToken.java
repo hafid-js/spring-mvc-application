@@ -14,13 +14,11 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 public class VerificationToken {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String token;
     private Date expirationTime;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -30,4 +28,6 @@ public class VerificationToken {
         this.user = user;
         this.expirationTime = TokenExpirationTime.getExpirationTime();
     }
+
+
 }

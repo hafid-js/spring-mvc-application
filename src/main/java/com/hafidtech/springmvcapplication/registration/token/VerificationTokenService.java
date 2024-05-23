@@ -13,9 +13,7 @@ import java.util.Optional;
 public class VerificationTokenService implements IVerificationTokenService {
 
     private final VerificationTokenRepository tokenRepository;
-
     private final UserRepository userRepository;
-
     @Override
     public String validateToken(String token) {
         Optional<VerificationToken> theToken = tokenRepository.findByToken(token);
@@ -36,11 +34,14 @@ public class VerificationTokenService implements IVerificationTokenService {
     public void saveVerificationTokenForUser(User user, String token) {
         var verificationToken = new VerificationToken(token, user);
         tokenRepository.save(verificationToken);
-
     }
-
     @Override
     public Optional<VerificationToken> findByToken(String token) {
         return tokenRepository.findByToken(token);
+    }
+
+    @Override
+    public void deleteUserToken(Long id) {
+        tokenRepository.deleteByUserId(id);
     }
 }
