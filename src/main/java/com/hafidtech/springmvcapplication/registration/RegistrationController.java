@@ -71,7 +71,6 @@ public class RegistrationController {
         if (user.isEmpty()){
             return  "redirect:/registration/forgot-password-request?not_found";
         }
-        System.out.println(email);
         String passwordResetToken = UUID.randomUUID().toString();
         passwordResetTokenService.createPasswordResetTokenForUser(user.get(), passwordResetToken);
         //send password reset verification email to the user
